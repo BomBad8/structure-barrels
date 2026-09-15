@@ -1,0 +1,21 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.17.16'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:26.2"
+    implementation "net.fabricmc:fabric-loader:0.19.3"
+    implementation "net.fabricmc.fabric-api:fabric-api:0.158.0+26.2"
+}
+
+version = '1.1.0'
+group = 'com.nobeddamage'
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 25
+}

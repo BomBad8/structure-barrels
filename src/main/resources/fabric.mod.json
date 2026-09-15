@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "nobeddamage",
+  "version": "1.1.0",
+  "name": "No Bed Damage",
+  "description": "Prevents bed and respawn-anchor explosion damage to players.",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.nobeddamage.NoBedDamage"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
