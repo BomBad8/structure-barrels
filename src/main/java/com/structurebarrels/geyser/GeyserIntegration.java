@@ -24,7 +24,9 @@ public final class GeyserIntegration {
                                 "structurebarrels:structure_treasure_barrel"
                         ),
                         javaId
-                ).build()
+                )
+                        .displayName("Structure Treasure Barrel")
+                        .build()
         );
 
         StructureBarrels.LOGGER.info(

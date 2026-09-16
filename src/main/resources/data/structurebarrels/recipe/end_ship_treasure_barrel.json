@@ -11,13 +11,17 @@
     "S": "minecraft:phantom_membrane",
     "N": "minecraft:netherite_ingot",
     "B": "minecraft:barrel",
-    "D":  "minecraft:diamond"
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "structurebarrels:structure_treasure_barrel",
     "count": 1,
     "components": {
-      "structurebarrels:structure": "end_ship"
+      "minecraft:custom_data": {
+        "structurebarrels": {
+          "structure": "end_ship"
+        }
+      }
     }
   }
 }

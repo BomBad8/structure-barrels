@@ -11,13 +11,17 @@
     "S": "minecraft:ender_eye",
     "N": "minecraft:netherite_ingot",
     "B": "minecraft:barrel",
-    "D":  "minecraft:diamond"
+    "D": "minecraft:diamond"
   },
   "result": {
     "id": "structurebarrels:structure_treasure_barrel",
     "count": 1,
     "components": {
-      "structurebarrels:structure": "stronghold"
+      "minecraft:custom_data": {
+        "structurebarrels": {
+          "structure": "stronghold"
+        }
+      }
     }
   }
 }

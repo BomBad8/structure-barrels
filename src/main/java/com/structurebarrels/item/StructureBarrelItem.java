@@ -1,21 +1,20 @@
 package com.structurebarrels.item;
 
-import com.structurebarrels.component.StructureBarrelComponent;
 import com.structurebarrels.loot.StructureBarrelLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.component.CustomData;
 
 public class StructureBarrelItem extends Item {
 
@@ -54,9 +53,7 @@ public class StructureBarrelItem extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
-        String structure = stack.get(
-                StructureBarrelComponent.STRUCTURE
-        );
+        String structure = getStructure(stack);
 
         if (structure == null) {
             return Component.literal("Structure Treasure Barrel");
@@ -68,6 +65,27 @@ public class StructureBarrelItem extends Item {
         );
     }
 
+    private static String getStructure(ItemStack stack) {
+        CustomData customData =
+                stack.get(DataComponents.CUSTOM_DATA);
+
+        if (customData == null || customData.isEmpty()) {
+            return null;
+        }
+
+        CompoundTag tag = customData.copyTag();
+
+        CompoundTag structureBarrels =
+                tag.getCompound("structurebarrels").orElse(null);
+
+        if (structureBarrels == null) {
+            return null;
+        }
+
+        return structureBarrels.getString("structure").orElse(null);
+    }
+
+    @Override
     public InteractionResult useOn(BlockPlaceContext context) {
         Level level = context.getLevel();
 
@@ -100,8 +118,8 @@ public class StructureBarrelItem extends Item {
 
         if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
 
-            String structure = context.getItemInHand().get(
-                    StructureBarrelComponent.STRUCTURE
+            String structure = getStructure(
+                    context.getItemInHand()
             );
 
             if (structure == null) {
