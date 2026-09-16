@@ -5,7 +5,7 @@ import com.structurebarrels.item.StructureBarrelItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.geysermc.event.Subscribe;
 import org.geysermc.geyser.api.event.lifecycle.GeyserDefineCustomItemsEvent;
-import org.geysermc.geyser.api.item.custom.NonVanillaCustomItemDefinition;
+import org.geysermc.geyser.api.item.custom.v2.NonVanillaCustomItemDefinition;
 import org.geysermc.geyser.api.util.Identifier;
 
 public final class GeyserIntegration {
@@ -24,12 +24,15 @@ public final class GeyserIntegration {
         event.register(
                 NonVanillaCustomItemDefinition.builder(
                         Identifier.of(
-                                StructureBarrels.MOD_ID
-                                        + ":structure_treasure_barrel"
+                                "structurebarrels:structure_treasure_barrel"
                         ),
                         javaId
-                )
-                .build()
+                ).build()
+        );
+
+        StructureBarrels.LOGGER.info(
+                "Registered Structure Treasure Barrel with Geyser (Java ID: {})",
+                javaId
         );
     }
 }

@@ -4,9 +4,21 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven { url = 'https://maven.fabricmc.net/' }
-    maven { url = 'https://repo.opencollab.dev/maven-releases/' }
-    maven { url = 'https://repo.opencollab.dev/maven-snapshots/' }
+
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+
+    maven {
+        name = 'OpenCollab'
+        url = 'https://repo.opencollab.dev/maven-releases/'
+    }
+
+    maven {
+        name = 'OpenCollabSnapshots'
+        url = 'https://repo.opencollab.dev/maven-snapshots/'
+    }
 }
 
 dependencies {
