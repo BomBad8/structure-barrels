@@ -7,7 +7,7 @@ import com.structurebarrels.loot.StructureBarrelLoot;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.geysermc.geyser.api.GeyserApi;
-import org.geysermc.geyser.api.extension.EventRegistrar;
+import org.geysermc.geyser.api.event.EventRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
