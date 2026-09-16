@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "name": "Structure Treasure Barrels",
   "description": "Craftable treasure barrels containing loot from scarce Minecraft structures.",
-  "environment": "*",
+  "environment": "server",
   "entrypoints": {
     "main": [
       "com.structurebarrels.StructureBarrels"
