@@ -7,21 +7,11 @@
     "PDP"
   ],
   "key": {
-    "P": {
-      "item": "minecraft:ender_pearl"
-    },
-    "S": {
-      "item": "minecraft:ender_eye"
-    },
-    "N": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "B": {
-      "item": "minecraft:barrel"
-    },
-    "D": {
-      "item": "minecraft:diamond"
-    }
+    "P": "minecraft:ender_pearl",
+    "S": "minecraft:ender_eye",
+    "N": "minecraft:netherite_ingot",
+    "B": "minecraft:barrel",
+    "D":  "minecraft:diamond"
   },
   "result": {
     "id": "structurebarrels:structure_treasure_barrel",
