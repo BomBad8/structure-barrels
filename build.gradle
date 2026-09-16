@@ -5,12 +5,16 @@ plugins {
 repositories {
     mavenCentral()
     maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://repo.opencollab.dev/maven-releases/' }
+    maven { url = 'https://repo.opencollab.dev/maven-snapshots/' }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:26.2"
     implementation "net.fabricmc:fabric-loader:0.19.3"
-    implementation "net.fabricmc.fabric-api:fabric-api:0.159.0+26.2"
+    implementation "net.fabricmc:fabric-api:0.159.0+26.2"
+
+    compileOnly "org.geysermc.geyser:api:2.11.3-SNAPSHOT"
 }
 
 version = '1.0.0'

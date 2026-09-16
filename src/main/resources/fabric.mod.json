@@ -8,6 +8,9 @@
   "entrypoints": {
     "main": [
       "com.structurebarrels.StructureBarrels"
+    ],
+    "geyser": [
+      "com.structurebarrels.geyser.GeyserIntegration"
     ]
   },
   "depends": {
