@@ -1,23 +1,25 @@
-package com.nobeddamage;
+package com.structurebarrels;
 
+import com.structurebarrels.component.StructureBarrelComponent;
+import com.structurebarrels.item.StructureBarrelItem;
+import com.structurebarrels.loot.StructureBarrelLoot;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class NoBedDamage implements ModInitializer {
+public class StructureBarrels implements ModInitializer {
+
+    public static final String MOD_ID = "structurebarrels";
+
+    public static final Logger LOGGER =
+            LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
-            // Only prevent bed / respawn-anchor explosion damage to players.
-            if (entity instanceof ServerPlayer && source.is(DamageTypes.BAD_RESPAWN_POINT)) {
-                return false;
-            }
+        StructureBarrelComponent.initialize();
+        StructureBarrelItem.initialize();
+        StructureBarrelLoot.initialize();
 
-            return true;
-        });
-
-        System.out.println("[NoBedDamage] Loaded - bed/respawn-anchor damage disabled for players.");
+        LOGGER.info("Structure Treasure Barrels loaded.");
     }
 }

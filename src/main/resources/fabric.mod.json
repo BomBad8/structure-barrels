@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "nobeddamage",
-  "version": "1.1.0",
-  "name": "No Bed Damage",
-  "description": "Prevents bed and respawn-anchor explosion damage to players.",
-  "environment": "server",
+  "id": "structurebarrels",
+  "version": "1.0.0",
+  "name": "Structure Treasure Barrels",
+  "description": "Craftable treasure barrels containing loot from scarce Minecraft structures.",
+  "environment": "*",
   "entrypoints": {
     "main": [
-      "com.nobeddamage.NoBedDamage"
+      "com.structurebarrels.StructureBarrels"
     ]
   },
   "depends": {

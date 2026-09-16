@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PSP",
+    "NBN",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "S": {
+      "item": "minecraft:gold_block"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "B": {
+      "item": "minecraft:barrel"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "structurebarrels:structure_treasure_barrel",
+    "count": 1,
+    "components": {
+      "structurebarrels:structure": "bastion_remnant"
+    }
+  }
+}

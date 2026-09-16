@@ -1,0 +1,201 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow",
+          "quality": 3,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:multishot",
+                "minecraft:piercing",
+                "minecraft:quick_charge",
+                "minecraft:unbreaking"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:quick_charge": 3,
+                "minecraft:piercing": 4,
+                "minecraft:unbreaking": 3,
+                "minecraft:mending": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow",
+          "functions": [
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:quick_charge": 3,
+                "minecraft:unbreaking": 3,
+                "minecraft:mending": 1,
+                "minecraft:multishot": 20
+              }
+            }
+          ]
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:dark_oak_planks",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 16,
+                "max": 48
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 8,
+                "max": 32
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 64,
+                "min": 16
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:arrow",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3,
+                "min": 1
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:iron_block",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 16,
+                "min": 4
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:iron_ingot",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot",
+              "conditions": []
+            }
+          ],
+          "name": "minecraft:book"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 10,
+        "min": 6
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:goat_horn"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_instrument",
+          "options": "#minecraft:regular_goat_horns"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2,
+        "min": 1
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              },
+              "function": "minecraft:set_count",
+              "conditions": []
+            }
+          ],
+          "name": "minecraft:sentry_armor_trim_smithing_template"
+        }
+      ],
+      "rolls": 2
+    }
+  ],
+  "random_sequence": "structurebarrels:chests/pillager_outpost"
+}
