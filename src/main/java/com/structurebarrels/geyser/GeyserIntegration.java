@@ -10,11 +10,8 @@ import org.geysermc.geyser.api.util.Identifier;
 
 public final class GeyserIntegration {
 
-    private GeyserIntegration() {
-    }
-
     @Subscribe
-    public static void onDefineCustomItems(
+    public void onDefineCustomItems(
             GeyserDefineCustomItemsEvent event
     ) {
         int javaId = BuiltInRegistries.ITEM.getId(
