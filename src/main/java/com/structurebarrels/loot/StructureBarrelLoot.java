@@ -3,8 +3,8 @@ package com.structurebarrels.loot;
 import com.structurebarrels.StructureBarrels;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.LootableContainerBlockEntity;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 public final class StructureBarrelLoot {
@@ -97,7 +97,7 @@ public final class StructureBarrelLoot {
     }
 
     public static void setLootTable(
-            LootableContainerBlockEntity barrel,
+            BarrelBlockEntity barrel,
             String structure
     ) {
         ResourceKey<LootTable> table = lootTable(structure);
@@ -112,14 +112,14 @@ public final class StructureBarrelLoot {
     private static ResourceKey<LootTable> vanilla(String path) {
         return ResourceKey.create(
                 Registries.LOOT_TABLE,
-                ResourceLocation.withDefaultNamespace(path)
+                Identifier.withDefaultNamespace(path)
         );
     }
 
     private static ResourceKey<LootTable> custom(String path) {
         return ResourceKey.create(
                 Registries.LOOT_TABLE,
-                ResourceLocation.fromNamespaceAndPath(
+                Identifier.fromNamespaceAndPath(
                         StructureBarrels.MOD_ID,
                         path
                 )

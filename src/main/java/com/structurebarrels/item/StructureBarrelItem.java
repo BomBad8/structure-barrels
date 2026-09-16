@@ -28,7 +28,7 @@ public class StructureBarrelItem extends Item {
     private static Item register() {
         var key = net.minecraft.resources.ResourceKey.create(
                 net.minecraft.core.registries.Registries.ITEM,
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(
+                net.minecraft.resources.Identifier.fromNamespaceAndPath(
                         "structurebarrels",
                         "structure_treasure_barrel"
                 )
