@@ -68,7 +68,6 @@ public class StructureBarrelItem extends Item {
         );
     }
 
-    @Override
     public InteractionResult useOn(BlockPlaceContext context) {
         Level level = context.getLevel();
 
