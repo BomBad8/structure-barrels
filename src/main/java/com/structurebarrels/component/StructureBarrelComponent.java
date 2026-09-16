@@ -11,7 +11,7 @@ public final class StructureBarrelComponent {
 
     public static final DataComponentType<String> STRUCTURE = Registry.register(
             BuiltInRegistries.DATA_COMPONENT_TYPE,
-            Identifier.fromNamespaceAndPath((
+            Identifier.fromNamespaceAndPath(
                     StructureBarrels.MOD_ID,
                     "structure"
             ),
