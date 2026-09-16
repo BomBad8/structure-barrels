@@ -10,6 +10,9 @@ import org.geysermc.geyser.api.GeyserApi;
 import org.geysermc.geyser.api.event.EventRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
+import net.fabricmc.fabric.api.event.registry.RegistryAttributeHolder;
+import net.minecraft.core.registries.Registries;
 
 public class StructureBarrels implements ModInitializer, EventRegistrar {
 
@@ -17,9 +20,12 @@ public class StructureBarrels implements ModInitializer, EventRegistrar {
 
     public static final Logger LOGGER =
             LoggerFactory.getLogger(MOD_ID);
-
+    
     @Override
     public void onInitialize() {
+        RegistryAttributeHolder.get(Registries.ITEM)
+                .addAttribute(RegistryAttribute.OPTIONAL);
+    
         StructureBarrelComponent.initialize();
         StructureBarrelItem.initialize();
         StructureBarrelLoot.initialize();
