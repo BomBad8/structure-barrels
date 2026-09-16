@@ -51,7 +51,6 @@ public class StructureBarrelItem extends Item {
     public static void initialize() {
     }
 
-    @Override
     public Component getName(ItemStack stack) {
         String structure = getStructure(stack);
 
