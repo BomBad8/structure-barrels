@@ -84,7 +84,6 @@ public class StructureBarrelItem extends Item {
         return structureBarrels.getString("structure").orElse(null);
     }
 
-    @Override
     public InteractionResult useOn(BlockPlaceContext context) {
         Level level = context.getLevel();
 
