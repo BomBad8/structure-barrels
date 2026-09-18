@@ -34,7 +34,6 @@ public final class GeyserIntegration {
                                 CustomItemBedrockOptions.builder()
                                         .icon("structure_treasure_barrel")
                                         .creativeCategory(CreativeCategory.ITEMS)
-                                        .build()
                         )
                         .component(
                                 GeyserItemDataComponents.BLOCK_PLACER,
