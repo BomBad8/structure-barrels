@@ -14,14 +14,7 @@
     "D": "minecraft:diamond"
   },
   "result": {
-    "id": "structurebarrels:structure_treasure_barrel",
-    "count": 1,
-    "components": {
-      "minecraft:custom_data": {
-        "structurebarrels": {
-          "structure": "bastion"
-        }
-      }
-    }
+    "id": "structurebarrels:bastion_treasure_barrel",
+    "count": 1
   }
 }

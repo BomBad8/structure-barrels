@@ -14,14 +14,7 @@
     "D": "minecraft:diamond"
   },
   "result": {
-    "id": "structurebarrels:structure_treasure_barrel",
-    "count": 1,
-    "components": {
-      "minecraft:custom_data": {
-        "structurebarrels": {
-          "structure": "end_city"
-        }
-      }
-    }
+    "id": "structurebarrels:end_city_treasure_barrel",
+    "count": 1
   }
 }

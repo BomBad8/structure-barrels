@@ -3,7 +3,6 @@ package com.structurebarrels.item;
 import com.structurebarrels.loot.StructureBarrelLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,22 +13,98 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.component.CustomData;
 
 public class StructureBarrelItem extends Item {
 
-    public StructureBarrelItem(Properties properties) {
+    private final String structure;
+
+    private StructureBarrelItem(
+            Properties properties,
+            String structure
+    ) {
         super(properties);
+        this.structure = structure;
     }
 
-    public static final Item STRUCTURE_TREASURE_BARREL = register();
+    public static final Item ANCIENT_CITY = register(
+            "ancient_city_treasure_barrel",
+            "ancient_city"
+    );
 
-    private static Item register() {
+    public static final Item BASTION = register(
+            "bastion_treasure_barrel",
+            "bastion"
+    );
+
+    public static final Item BURIED_TREASURE = register(
+            "buried_treasure_treasure_barrel",
+            "buried_treasure"
+    );
+
+    public static final Item DESERT_PYRAMID = register(
+            "desert_pyramid_treasure_barrel",
+            "desert_pyramid"
+    );
+
+    public static final Item END_CITY = register(
+            "end_city_treasure_barrel",
+            "end_city"
+    );
+
+    public static final Item END_SHIP = register(
+            "end_ship_treasure_barrel",
+            "end_ship"
+    );
+
+    public static final Item JUNGLE_TEMPLE = register(
+            "jungle_temple_treasure_barrel",
+            "jungle_temple"
+    );
+
+    public static final Item NETHER_FORTRESS = register(
+            "nether_fortress_treasure_barrel",
+            "nether_fortress"
+    );
+
+    public static final Item OCEAN_MONUMENT = register(
+            "ocean_monument_treasure_barrel",
+            "ocean_monument"
+    );
+
+    public static final Item PILLAGER_OUTPOST = register(
+            "pillager_outpost_treasure_barrel",
+            "pillager_outpost"
+    );
+
+    public static final Item STRONGHOLD = register(
+            "stronghold_treasure_barrel",
+            "stronghold"
+    );
+
+    public static final Item TRIAL_CHAMBER_NORMAL = register(
+            "trial_chamber_normal_treasure_barrel",
+            "trial_chamber_normal"
+    );
+
+    public static final Item TRIAL_CHAMBER_OMINOUS = register(
+            "trial_chamber_ominous_treasure_barrel",
+            "trial_chamber_ominous"
+    );
+
+    public static final Item WOODLAND_MANSION = register(
+            "woodland_mansion_treasure_barrel",
+            "woodland_mansion"
+    );
+
+    private static Item register(
+            String itemId,
+            String structure
+    ) {
         var key = net.minecraft.resources.ResourceKey.create(
                 net.minecraft.core.registries.Registries.ITEM,
                 net.minecraft.resources.Identifier.fromNamespaceAndPath(
                         "structurebarrels",
-                        "structure_treasure_barrel"
+                        itemId
                 )
         );
 
@@ -43,7 +118,8 @@ public class StructureBarrelItem extends Item {
                                 .component(
                                         DataComponents.ENCHANTMENT_GLINT_OVERRIDE,
                                         true
-                                )
+                                ),
+                        structure
                 )
         );
     }
@@ -52,36 +128,14 @@ public class StructureBarrelItem extends Item {
     }
 
     public Component getName(ItemStack stack) {
-        String structure = getStructure(stack);
-
-        if (structure == null) {
-            return Component.literal("Structure Treasure Barrel");
-        }
-
         return Component.literal(
                 StructureBarrelLoot.displayName(structure)
                         + " Treasure Barrel"
         );
     }
 
-    private static String getStructure(ItemStack stack) {
-        CustomData customData =
-                stack.get(DataComponents.CUSTOM_DATA);
-
-        if (customData == null || customData.isEmpty()) {
-            return null;
-        }
-
-        CompoundTag tag = customData.copyTag();
-
-        CompoundTag structureBarrels =
-                tag.getCompound("structurebarrels").orElse(null);
-
-        if (structureBarrels == null) {
-            return null;
-        }
-
-        return structureBarrels.getString("structure").orElse(null);
+    public String getStructure() {
+        return structure;
     }
 
     public InteractionResult useOn(BlockPlaceContext context) {
@@ -115,15 +169,6 @@ public class StructureBarrelItem extends Item {
         }
 
         if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-
-            String structure = getStructure(
-                    context.getItemInHand()
-            );
-
-            if (structure == null) {
-                level.removeBlock(pos, false);
-                return InteractionResult.FAIL;
-            }
 
             StructureBarrelLoot.setLootTable(
                     barrel,

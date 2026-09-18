@@ -18,21 +18,124 @@ public final class GeyserIntegration {
     public void onDefineCustomItems(
             GeyserDefineCustomItemsEvent event
     ) {
-        int javaId = BuiltInRegistries.ITEM.getId(
-                StructureBarrelItem.STRUCTURE_TREASURE_BARREL
+        register(
+                event,
+                StructureBarrelItem.ANCIENT_CITY,
+                "ancient_city_treasure_barrel",
+                "Ancient City Treasure Barrel"
         );
+
+        register(
+                event,
+                StructureBarrelItem.BASTION,
+                "bastion_treasure_barrel",
+                "Bastion Remnant Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.BURIED_TREASURE,
+                "buried_treasure_treasure_barrel",
+                "Buried Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.DESERT_PYRAMID,
+                "desert_pyramid_treasure_barrel",
+                "Desert Pyramid Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.END_CITY,
+                "end_city_treasure_barrel",
+                "End City Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.END_SHIP,
+                "end_ship_treasure_barrel",
+                "End Ship Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.JUNGLE_TEMPLE,
+                "jungle_temple_treasure_barrel",
+                "Jungle Temple Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.NETHER_FORTRESS,
+                "nether_fortress_treasure_barrel",
+                "Nether Fortress Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.OCEAN_MONUMENT,
+                "ocean_monument_treasure_barrel",
+                "Ocean Monument Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.PILLAGER_OUTPOST,
+                "pillager_outpost_treasure_barrel",
+                "Pillager Outpost Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.STRONGHOLD,
+                "stronghold_treasure_barrel",
+                "Stronghold Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.TRIAL_CHAMBER_NORMAL,
+                "trial_chamber_normal_treasure_barrel",
+                "Trial Chamber Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.TRIAL_CHAMBER_OMINOUS,
+                "trial_chamber_ominous_treasure_barrel",
+                "Ominous Trial Chamber Treasure Barrel"
+        );
+
+        register(
+                event,
+                StructureBarrelItem.WOODLAND_MANSION,
+                "woodland_mansion_treasure_barrel",
+                "Woodland Mansion Treasure Barrel"
+        );
+    }
+
+    private static void register(
+            GeyserDefineCustomItemsEvent event,
+            Item item,
+            String itemId,
+            String displayName
+    ) {
+        int javaId = BuiltInRegistries.ITEM.getId(item);
 
         event.register(
                 NonVanillaCustomItemDefinition.builder(
                         Identifier.of(
-                                "structurebarrels:structure_treasure_barrel"
+                                "structurebarrels:" + itemId
                         ),
                         javaId
                 )
-                        .displayName("Structure Treasure Barrel")
+                        .displayName(displayName)
                         .bedrockOptions(
                                 CustomItemBedrockOptions.builder()
-                                        .icon("structure_treasure_barrel")
+                                        .icon("structurebarrels:" + itemId)
                                         .creativeCategory(CreativeCategory.ITEMS)
                         )
                         .component(
@@ -45,7 +148,8 @@ public final class GeyserIntegration {
         );
 
         StructureBarrels.LOGGER.info(
-                "Registered Structure Treasure Barrel with Geyser (Java ID: {})",
+                "Registered {} with Geyser (Java ID: {})",
+                displayName,
                 javaId
         );
     }
