@@ -136,15 +136,20 @@ public final class GeyserIntegration {
                         .displayName(displayName)
                         .bedrockOptions(
                                 CustomItemBedrockOptions.builder()
-                                        .icon("structurebarrels:" + itemId)
                                         .creativeCategory(CreativeCategory.ITEMS)
+                        )
+                        .component(
+                            GeyserItemDataComponents.MAX_STACK_SIZE,
+                            64
                         )
                         .component(
                                 GeyserItemDataComponents.BLOCK_PLACER,
                                 GeyserBlockPlacer.builder()
-                                        .block(Identifier.of("barrel"))
+                                        .block(Identifier.of("minecraft:barrel"))
+                                        .useBlockIcon(true)
                                         .build()
                         )
+                        
                         .build()
         );
 
