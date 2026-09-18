@@ -10,6 +10,7 @@ import org.geysermc.geyser.api.item.custom.v2.CustomItemBedrockOptions;
 import org.geysermc.geyser.api.item.custom.v2.NonVanillaCustomItemDefinition;
 import org.geysermc.geyser.api.item.custom.v2.component.geyser.GeyserBlockPlacer;
 import org.geysermc.geyser.api.item.custom.v2.component.geyser.GeyserItemDataComponents;
+import org.geysermc.geyser.api.item.custom.v2.component.java.JavaItemDataComponents;
 import org.geysermc.geyser.api.util.CreativeCategory;
 import org.geysermc.geyser.api.util.Identifier;
 
@@ -139,7 +140,7 @@ public final class GeyserIntegration {
                                         .creativeCategory(CreativeCategory.ITEMS)
                         )
                         .component(
-                            GeyserItemDataComponents.MAX_STACK_SIZE,
+                            JavaItemDataComponents.MAX_STACK_SIZE,
                             64
                         )
                         .component(
