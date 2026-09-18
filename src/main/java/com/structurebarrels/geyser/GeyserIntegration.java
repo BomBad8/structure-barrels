@@ -3,6 +3,7 @@ package com.structurebarrels.geyser;
 import com.structurebarrels.StructureBarrels;
 import com.structurebarrels.item.StructureBarrelItem;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.Item;
 import org.geysermc.event.subscribe.Subscribe;
 import org.geysermc.geyser.api.event.lifecycle.GeyserDefineCustomItemsEvent;
 import org.geysermc.geyser.api.item.custom.v2.CustomItemBedrockOptions;
