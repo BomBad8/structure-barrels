@@ -169,7 +169,6 @@ public class StructureBarrelItem extends Item {
         }
 
         if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-
             StructureBarrelLoot.setLootTable(
                     barrel,
                     structure

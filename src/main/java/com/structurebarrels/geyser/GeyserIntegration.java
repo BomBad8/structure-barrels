@@ -140,8 +140,12 @@ public final class GeyserIntegration {
                                         .creativeCategory(CreativeCategory.ITEMS)
                         )
                         .component(
-                            JavaItemDataComponents.MAX_STACK_SIZE,
-                            64
+                                JavaItemDataComponents.MAX_STACK_SIZE,
+                                64
+                        )
+                        .component(
+                                JavaItemDataComponents.ENCHANTMENT_GLINT_OVERRIDE,
+                                true
                         )
                         .component(
                                 GeyserItemDataComponents.BLOCK_PLACER,
