@@ -98,8 +98,7 @@ public final class StructureBarrelLoot {
         }
 
         StructureBarrels.LOGGER.info(
-                "Setting loot table {} on {} barrel",
-                table.location(),
+                "Setting loot table for structure: {}",
                 structure
         );
 
