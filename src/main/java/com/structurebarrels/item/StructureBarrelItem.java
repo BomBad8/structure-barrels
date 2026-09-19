@@ -4,6 +4,7 @@ import com.structurebarrels.loot.StructureBarrelLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -12,8 +13,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.network.chat.Component;
 
 public class StructureBarrelItem extends BlockItem {
 
@@ -128,6 +127,7 @@ public class StructureBarrelItem extends BlockItem {
     public static void initialize() {
     }
 
+    @Override
     public Component getName(ItemStack stack) {
         return Component.literal(
                 StructureBarrelLoot.displayName(structure)
@@ -139,6 +139,7 @@ public class StructureBarrelItem extends BlockItem {
         return structure;
     }
 
+    @Override
     public InteractionResult useOn(BlockPlaceContext context) {
         InteractionResult result = super.useOn(context);
 
@@ -148,19 +149,18 @@ public class StructureBarrelItem extends BlockItem {
 
         Level level = context.getLevel();
 
-        if (level.isClientSide()) {
+        if (!(level instanceof ServerLevel serverLevel)) {
             return result;
         }
 
         BlockPos pos = context.getClickedPos();
 
-        if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-            StructureBarrelLoot.setLootTable(
+        if (serverLevel.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
+            StructureBarrelLoot.generateLoot(
+                    serverLevel,
                     barrel,
                     structure
             );
-
-            barrel.setChanged();
         }
 
         return result;

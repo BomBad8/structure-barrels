@@ -4,8 +4,12 @@ import com.structurebarrels.StructureBarrels;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 public final class StructureBarrelLoot {
 
@@ -83,13 +87,14 @@ public final class StructureBarrelLoot {
         };
     }
 
-    public static void setLootTable(
+    public static void generateLoot(
+            ServerLevel level,
             BarrelBlockEntity barrel,
             String structure
     ) {
-        ResourceKey<LootTable> table = lootTable(structure);
+        ResourceKey<LootTable> tableKey = lootTable(structure);
 
-        if (table == null) {
+        if (tableKey == null) {
             StructureBarrels.LOGGER.warn(
                     "No loot table found for structure: {}",
                     structure
@@ -97,13 +102,51 @@ public final class StructureBarrelLoot {
             return;
         }
 
+        LootTable table =
+                level.getServer()
+                        .reloadableRegistries()
+                        .getLootTable(tableKey);
+
+        if (table == LootTable.EMPTY) {
+            StructureBarrels.LOGGER.warn(
+                    "Loot table is empty or missing for structure: {} ({})",
+                    structure,
+                    tableKey
+            );
+            return;
+        }
+
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(
+                        LootContextParams.ORIGIN,
+                        barrel.getBlockPos().getCenter()
+                )
+                .withParameter(
+                        LootContextParams.BLOCK_ENTITY,
+                        barrel
+                )
+                .create(LootContextParamSets.CHEST);
+
+        long seed = level.random.nextLong();
+
         StructureBarrels.LOGGER.info(
-                "Setting loot table for structure: {}",
-                structure
+                "Generating loot for structure: {} using {}",
+                structure,
+                tableKey
         );
 
-        barrel.setLootTable(table);
+        table.fill(
+                barrel,
+                params,
+                seed
+        );
+
         barrel.setChanged();
+
+        StructureBarrels.LOGGER.info(
+                "Finished generating loot for structure: {}",
+                structure
+        );
     }
 
     private static ResourceKey<LootTable> vanilla(String path) {
