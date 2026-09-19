@@ -3,6 +3,7 @@ package com.structurebarrels.item;
 import com.structurebarrels.loot.StructureBarrelLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -141,21 +142,25 @@ public class StructureBarrelItem extends BlockItem {
     public InteractionResult useOn(BlockPlaceContext context) {
         InteractionResult result = super.useOn(context);
 
-        if (result != InteractionResult.FAIL) {
-            Level level = context.getLevel();
+        if (result != InteractionResult.SUCCESS) {
+            return result;
+        }
 
-            if (!level.isClientSide()) {
-                BlockPos pos = context.getClickedPos();
+        Level level = context.getLevel();
 
-                if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-                    StructureBarrelLoot.setLootTable(
-                            barrel,
-                            structure
-                    );
+        if (level.isClientSide()) {
+            return result;
+        }
 
-                    barrel.setChanged();
-                }
-            }
+        BlockPos pos = context.getClickedPos();
+
+        if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
+            StructureBarrelLoot.setLootTable(
+                    barrel,
+                    structure
+            );
+
+            barrel.setChanged();
         }
 
         return result;
