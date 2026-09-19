@@ -2,8 +2,8 @@ package com.structurebarrels.loot;
 
 import com.structurebarrels.StructureBarrels;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.storage.loot.LootTable;
 
@@ -37,7 +37,6 @@ public final class StructureBarrelLoot {
 
     public static ResourceKey<LootTable> lootTable(String structure) {
         return switch (structure) {
-
             case "ancient_city" ->
                     vanilla("chests/ancient_city");
 
@@ -53,10 +52,6 @@ public final class StructureBarrelLoot {
             case "end_city" ->
                     vanilla("chests/end_city_treasure");
 
-            /*
-             * An End Ship does not have its own vanilla loot table.
-             * Its loot comes from the End City treasure table.
-             */
             case "end_ship" ->
                     vanilla("chests/end_city_treasure");
 
@@ -66,10 +61,6 @@ public final class StructureBarrelLoot {
             case "nether_fortress" ->
                     vanilla("chests/nether_bridge");
 
-            /*
-             * These two intentionally use our custom balanced
-             * loot tables rather than vanilla loot.
-             */
             case "ocean_monument" ->
                     custom("ocean_monument");
 
@@ -79,10 +70,6 @@ public final class StructureBarrelLoot {
             case "stronghold" ->
                     vanilla("chests/stronghold_corridor");
 
-            /*
-             * Keep these as separate mod categories even though
-             * both originate from the same vanilla structure.
-             */
             case "trial_chamber_normal" ->
                     vanilla("chests/trial_chambers/reward");
 
@@ -103,10 +90,21 @@ public final class StructureBarrelLoot {
         ResourceKey<LootTable> table = lootTable(structure);
 
         if (table == null) {
+            StructureBarrels.LOGGER.warn(
+                    "No loot table found for structure: {}",
+                    structure
+            );
             return;
         }
 
+        StructureBarrels.LOGGER.info(
+                "Setting loot table {} on {} barrel",
+                table.location(),
+                structure
+        );
+
         barrel.setLootTable(table);
+        barrel.setChanged();
     }
 
     private static ResourceKey<LootTable> vanilla(String path) {
