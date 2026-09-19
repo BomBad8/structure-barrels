@@ -4,25 +4,25 @@ import com.structurebarrels.loot.StructureBarrelLoot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.network.chat.Component;
 
-public class StructureBarrelItem extends Item {
+public class StructureBarrelItem extends BlockItem {
 
     private final String structure;
 
     private StructureBarrelItem(
-            Properties properties,
-            String structure
+            String structure,
+            Properties properties
     ) {
-        super(properties);
+        super(Blocks.BARREL, properties);
         this.structure = structure;
     }
 
@@ -112,14 +112,14 @@ public class StructureBarrelItem extends Item {
                 net.minecraft.core.registries.BuiltInRegistries.ITEM,
                 key,
                 new StructureBarrelItem(
+                        structure,
                         new Item.Properties()
                                 .setId(key)
                                 .stacksTo(64)
                                 .component(
                                         DataComponents.ENCHANTMENT_GLINT_OVERRIDE,
                                         true
-                                ),
-                        structure
+                                )
                 )
         );
     }
@@ -139,50 +139,25 @@ public class StructureBarrelItem extends Item {
     }
 
     public InteractionResult useOn(BlockPlaceContext context) {
-        Level level = context.getLevel();
+        InteractionResult result = super.useOn(context);
 
-        if (level.isClientSide()) {
-            return InteractionResult.SUCCESS;
+        if (result != InteractionResult.FAIL) {
+            Level level = context.getLevel();
+
+            if (!level.isClientSide()) {
+                BlockPos pos = context.getClickedPos();
+
+                if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
+                    StructureBarrelLoot.setLootTable(
+                            barrel,
+                            structure
+                    );
+
+                    barrel.setChanged();
+                }
+            }
         }
 
-        Player player = context.getPlayer();
-
-        if (player == null) {
-            return InteractionResult.FAIL;
-        }
-
-        BlockPos pos = context.getClickedPos();
-
-        if (!level.getBlockState(pos).canBeReplaced(context)) {
-            return InteractionResult.FAIL;
-        }
-
-        BlockState barrelState =
-                Blocks.BARREL.getStateForPlacement(context);
-
-        if (barrelState == null) {
-            return InteractionResult.FAIL;
-        }
-
-        if (!level.setBlock(pos, barrelState, 3)) {
-            return InteractionResult.FAIL;
-        }
-
-        if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-            StructureBarrelLoot.setLootTable(
-                    barrel,
-                    structure
-            );
-
-            barrel.setChanged();
-        }
-
-        ItemStack stack = context.getItemInHand();
-
-        if (!player.getAbilities().instabuild) {
-            stack.shrink(1);
-        }
-
-        return InteractionResult.SUCCESS;
+        return result;
     }
 }
