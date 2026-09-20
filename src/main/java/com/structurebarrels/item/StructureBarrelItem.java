@@ -127,7 +127,6 @@ public class StructureBarrelItem extends BlockItem {
     public static void initialize() {
     }
 
-    @Override
     public Component getName(ItemStack stack) {
         return Component.literal(
                 StructureBarrelLoot.displayName(structure)

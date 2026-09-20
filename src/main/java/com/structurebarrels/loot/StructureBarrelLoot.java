@@ -1,6 +1,7 @@
 package com.structurebarrels.loot;
 
 import com.structurebarrels.StructureBarrels;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -119,7 +120,9 @@ public final class StructureBarrelLoot {
         LootParams params = new LootParams.Builder(level)
                 .withParameter(
                         LootContextParams.ORIGIN,
-                        barrel.getBlockPos().getCenter()
+                        net.minecraft.world.phys.Vec3.atCenterOf(
+                                barrel.getBlockPos()
+                        )
                 )
                 .withParameter(
                         LootContextParams.BLOCK_ENTITY,
@@ -127,12 +130,11 @@ public final class StructureBarrelLoot {
                 )
                 .create(LootContextParamSets.CHEST);
 
-        long seed = level.random.nextLong();
+        long seed = level.getRandom().nextLong();
 
         StructureBarrels.LOGGER.info(
-                "Generating loot for structure: {} using {}",
-                structure,
-                tableKey
+                "Generating loot for structure: {}",
+                structure
         );
 
         table.fill(
