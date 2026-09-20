@@ -138,7 +138,6 @@ public class StructureBarrelItem extends BlockItem {
         return structure;
     }
 
-    @Override
     public InteractionResult useOn(BlockPlaceContext context) {
         InteractionResult result = super.useOn(context);
 
