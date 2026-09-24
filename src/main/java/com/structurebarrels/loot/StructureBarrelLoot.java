@@ -1,16 +1,12 @@
 package com.structurebarrels.loot;
 
 import com.structurebarrels.StructureBarrels;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 public final class StructureBarrelLoot {
 
@@ -103,52 +99,35 @@ public final class StructureBarrelLoot {
             return;
         }
 
-        LootTable table =
-                level.getServer()
-                        .reloadableRegistries()
-                        .getLootTable(tableKey);
-
-        if (table == LootTable.EMPTY) {
-            StructureBarrels.LOGGER.warn(
-                    "Loot table is empty or missing for structure: {} ({})",
-                    structure,
-                    tableKey
-            );
-            return;
-        }
-
-        LootParams params = new LootParams.Builder(level)
-                .withParameter(
-                        LootContextParams.ORIGIN,
-                        net.minecraft.world.phys.Vec3.atCenterOf(
-                                barrel.getBlockPos()
-                        )
-                )
-                .withParameter(
-                        LootContextParams.BLOCK_ENTITY,
-                        barrel
-                )
-                .create(LootContextParamSets.CHEST);
-
-        long seed = level.getRandom().nextLong();
+        String command =
+                "loot insert "
+                        + barrel.getBlockPos().getX()
+                        + " "
+                        + barrel.getBlockPos().getY()
+                        + " "
+                        + barrel.getBlockPos().getZ()
+                        + " loot "
+                        + tableKey.location();
 
         StructureBarrels.LOGGER.info(
-                "Generating loot for structure: {}",
-                structure
+                "Running loot command: /{}",
+                command
         );
 
-        table.fill(
-                barrel,
-                params,
-                seed
-        );
-
-        barrel.setChanged();
-
-        StructureBarrels.LOGGER.info(
-                "Finished generating loot for structure: {}",
-                structure
-        );
+        level.getServer()
+                .getCommands()
+                .performPrefixedCommand(
+                        level.getServer()
+                                .createCommandSourceStack()
+                                .withLevel(level)
+                                .withPosition(
+                                        net.minecraft.world.phys.Vec3.atCenterOf(
+                                                barrel.getBlockPos()
+                                        )
+                                )
+                                .withSuppressedOutput(),
+                        command
+                );
     }
 
     private static ResourceKey<LootTable> vanilla(String path) {
