@@ -84,14 +84,62 @@ public final class StructureBarrelLoot {
         };
     }
 
+    private static String lootTableId(String structure) {
+        return switch (structure) {
+            case "ancient_city" ->
+                    "minecraft:chests/ancient_city";
+
+            case "bastion" ->
+                    "minecraft:chests/bastion_treasure";
+
+            case "buried_treasure" ->
+                    "minecraft:chests/buried_treasure";
+
+            case "desert_pyramid" ->
+                    "minecraft:chests/desert_pyramid";
+
+            case "end_city" ->
+                    "minecraft:chests/end_city_treasure";
+
+            case "end_ship" ->
+                    "minecraft:chests/end_city_treasure";
+
+            case "jungle_temple" ->
+                    "minecraft:chests/jungle_temple";
+
+            case "nether_fortress" ->
+                    "minecraft:chests/nether_bridge";
+
+            case "ocean_monument" ->
+                    "structurebarrels:ocean_monument";
+
+            case "pillager_outpost" ->
+                    "structurebarrels:pillager_outpost";
+
+            case "stronghold" ->
+                    "minecraft:chests/stronghold_corridor";
+
+            case "trial_chamber_normal" ->
+                    "minecraft:chests/trial_chambers/reward";
+
+            case "trial_chamber_ominous" ->
+                    "minecraft:chests/trial_chambers/reward_ominous";
+
+            case "woodland_mansion" ->
+                    "minecraft:chests/woodland_mansion";
+
+            default -> null;
+        };
+    }
+
     public static void generateLoot(
             ServerLevel level,
             BarrelBlockEntity barrel,
             String structure
     ) {
-        ResourceKey<LootTable> tableKey = lootTable(structure);
+        String lootId = lootTableId(structure);
 
-        if (tableKey == null) {
+        if (lootId == null) {
             StructureBarrels.LOGGER.warn(
                     "No loot table found for structure: {}",
                     structure
@@ -107,7 +155,7 @@ public final class StructureBarrelLoot {
                         + " "
                         + barrel.getBlockPos().getZ()
                         + " loot "
-                        + tableKey.location();
+                        + lootId;
 
         StructureBarrels.LOGGER.info(
                 "Running loot command: /{}",
