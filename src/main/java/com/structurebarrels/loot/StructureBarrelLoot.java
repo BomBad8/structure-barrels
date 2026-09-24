@@ -36,54 +36,6 @@ public final class StructureBarrelLoot {
         };
     }
 
-    public static ResourceKey<LootTable> lootTable(String structure) {
-        return switch (structure) {
-            case "ancient_city" ->
-                    vanilla("chests/ancient_city");
-
-            case "bastion" ->
-                    vanilla("chests/bastion_treasure");
-
-            case "buried_treasure" ->
-                    vanilla("chests/buried_treasure");
-
-            case "desert_pyramid" ->
-                    vanilla("chests/desert_pyramid");
-
-            case "end_city" ->
-                    vanilla("chests/end_city_treasure");
-
-            case "end_ship" ->
-                    vanilla("chests/end_city_treasure");
-
-            case "jungle_temple" ->
-                    vanilla("chests/jungle_temple");
-
-            case "nether_fortress" ->
-                    vanilla("chests/nether_bridge");
-
-            case "ocean_monument" ->
-                    custom("ocean_monument");
-
-            case "pillager_outpost" ->
-                    custom("pillager_outpost");
-
-            case "stronghold" ->
-                    vanilla("chests/stronghold_corridor");
-
-            case "trial_chamber_normal" ->
-                    vanilla("chests/trial_chambers/reward");
-
-            case "trial_chamber_ominous" ->
-                    vanilla("chests/trial_chambers/reward_ominous");
-
-            case "woodland_mansion" ->
-                    vanilla("chests/woodland_mansion");
-
-            default -> null;
-        };
-    }
-
     private static String lootTableId(String structure) {
         return switch (structure) {
             case "ancient_city" ->

@@ -1,18 +1,19 @@
 package com.structurebarrels.item;
 
-import com.structurebarrels.loot.StructureBarrelLoot;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SeededContainerLoot;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BarrelBlockEntity;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 public class StructureBarrelItem extends BlockItem {
 
@@ -100,16 +101,23 @@ public class StructureBarrelItem extends BlockItem {
             String itemId,
             String structure
     ) {
-        var key = net.minecraft.resources.ResourceKey.create(
+        ResourceKey<Item> key = ResourceKey.create(
                 net.minecraft.core.registries.Registries.ITEM,
-                net.minecraft.resources.Identifier.fromNamespaceAndPath(
+                Identifier.fromNamespaceAndPath(
                         "structurebarrels",
                         itemId
                 )
         );
 
+        ResourceKey<LootTable> lootTable = ResourceKey.create(
+                Registries.LOOT_TABLE,
+                Identifier.parse(
+                        StructureBarrelLootId.get(structure)
+                )
+        );
+
         return net.minecraft.core.Registry.register(
-                net.minecraft.core.registries.BuiltInRegistries.ITEM,
+                BuiltInRegistries.ITEM,
                 key,
                 new StructureBarrelItem(
                         structure,
@@ -117,8 +125,15 @@ public class StructureBarrelItem extends BlockItem {
                                 .setId(key)
                                 .stacksTo(64)
                                 .component(
-                                        DataComponents.ENCHANTMENT_GLINT_OVERRIDE,
+                                        net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE,
                                         true
+                                )
+                                .component(
+                                        net.minecraft.core.component.DataComponents.CONTAINER_LOOT,
+                                        new SeededContainerLoot(
+                                                lootTable,
+                                                0L
+                                        )
                                 )
                 )
         );
@@ -127,11 +142,30 @@ public class StructureBarrelItem extends BlockItem {
     public static void initialize() {
     }
 
-    public Component getName(ItemStack stack) {
-        return Component.literal(
-                StructureBarrelLoot.displayName(structure)
-                        + " Treasure Barrel"
+    public net.minecraft.network.chat.Component getName(ItemStack stack) {
+        return net.minecraft.network.chat.Component.literal(
+                displayName(structure) + " Treasure Barrel"
         );
+    }
+
+    private static String displayName(String structure) {
+        return switch (structure) {
+            case "ancient_city" -> "Ancient City";
+            case "bastion" -> "Bastion Remnant";
+            case "buried_treasure" -> "Buried Treasure";
+            case "desert_pyramid" -> "Desert Pyramid";
+            case "end_city" -> "End City";
+            case "end_ship" -> "End Ship";
+            case "jungle_temple" -> "Jungle Temple";
+            case "nether_fortress" -> "Nether Fortress";
+            case "ocean_monument" -> "Ocean Monument";
+            case "pillager_outpost" -> "Pillager Outpost";
+            case "stronghold" -> "Stronghold";
+            case "trial_chamber_normal" -> "Trial Chamber";
+            case "trial_chamber_ominous" -> "Ominous Trial Chamber";
+            case "woodland_mansion" -> "Woodland Mansion";
+            default -> "Structure";
+        };
     }
 
     public String getStructure() {
@@ -139,28 +173,63 @@ public class StructureBarrelItem extends BlockItem {
     }
 
     public InteractionResult useOn(BlockPlaceContext context) {
-        InteractionResult result = super.useOn(context);
+        return super.useOn(context);
+    }
 
-        if (result != InteractionResult.SUCCESS) {
-            return result;
+    private static final class StructureBarrelLoot {
+        private StructureBarrelLoot() {
         }
+    }
 
-        Level level = context.getLevel();
+    private static final class StructureBarrelLootId {
 
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return result;
+        private static String get(String structure) {
+            return switch (structure) {
+                case "ancient_city" ->
+                        "minecraft:chests/ancient_city";
+
+                case "bastion" ->
+                        "minecraft:chests/bastion_treasure";
+
+                case "buried_treasure" ->
+                        "minecraft:chests/buried_treasure";
+
+                case "desert_pyramid" ->
+                        "minecraft:chests/desert_pyramid";
+
+                case "end_city" ->
+                        "minecraft:chests/end_city_treasure";
+
+                case "end_ship" ->
+                        "minecraft:chests/end_city_treasure";
+
+                case "jungle_temple" ->
+                        "minecraft:chests/jungle_temple";
+
+                case "nether_fortress" ->
+                        "minecraft:chests/nether_bridge";
+
+                case "ocean_monument" ->
+                        "structurebarrels:ocean_monument";
+
+                case "pillager_outpost" ->
+                        "structurebarrels:pillager_outpost";
+
+                case "stronghold" ->
+                        "minecraft:chests/stronghold_corridor";
+
+                case "trial_chamber_normal" ->
+                        "minecraft:chests/trial_chambers/reward";
+
+                case "trial_chamber_ominous" ->
+                        "minecraft:chests/trial_chambers/reward_ominous";
+
+                case "woodland_mansion" ->
+                        "minecraft:chests/woodland_mansion";
+
+                default ->
+                        "minecraft:empty";
+            };
         }
-
-        BlockPos pos = context.getClickedPos();
-
-        if (serverLevel.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-            StructureBarrelLoot.generateLoot(
-                    serverLevel,
-                    barrel,
-                    structure
-            );
-        }
-
-        return result;
     }
 }
