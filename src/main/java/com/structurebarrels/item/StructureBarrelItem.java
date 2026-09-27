@@ -180,25 +180,25 @@ public class StructureBarrelItem extends BlockItem {
         private static String get(String structure) {
             return switch (structure) {
                 case "ancient_city" ->
-                        "minecraft:chests/ancient_city";
+                        "structurebarrels:ancient_city";
 
                 case "bastion" ->
-                        "minecraft:chests/bastion_treasure";
+                        "structurebarrels:bastion_treasure";
 
                 case "buried_treasure" ->
-                        "minecraft:chests/buried_treasure";
+                        "structurebarrels:buried_treasure";
 
                 case "desert_pyramid" ->
-                        "minecraft:chests/desert_pyramid";
+                        "structurebarrels:desert_pyramid";
 
                 case "end_city" ->
-                        "minecraft:chests/end_city_treasure";
+                        "structurebarrels:end_city_treasure";
 
                 case "jungle_temple" ->
-                        "minecraft:chests/jungle_temple";
+                        "structurebarrels:jungle_temple";
 
                 case "nether_fortress" ->
-                        "minecraft:chests/nether_bridge";
+                        "structurebarrels:nether_bridge";
 
                 case "ocean_monument" ->
                         "structurebarrels:ocean_monument";
@@ -207,16 +207,16 @@ public class StructureBarrelItem extends BlockItem {
                         "structurebarrels:pillager_outpost";
 
                 case "stronghold" ->
-                        "minecraft:chests/stronghold_corridor";
+                        "structurebarrels:stronghold_corridor";
 
                 case "trial_chamber_normal" ->
-                        "minecraft:chests/trial_chambers/reward";
+                        "structurebarrels:trial_chambers_reward";
 
                 case "trial_chamber_ominous" ->
-                        "minecraft:chests/trial_chambers/reward_ominous";
+                        "structurebarrels:trial_chambers_reward_ominous";
 
                 case "woodland_mansion" ->
-                        "minecraft:chests/woodland_mansion";
+                        "structurebarrels:woodland_mansion";
 
                 default ->
                         "minecraft:empty";
