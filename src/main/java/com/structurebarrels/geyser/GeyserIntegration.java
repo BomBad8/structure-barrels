@@ -131,6 +131,7 @@ public final class GeyserIntegration {
                         .bedrockOptions(
                                 CustomItemBedrockOptions.builder()
                                         .creativeCategory(CreativeCategory.ITEMS)
+                                        .creativeGroup("itemGroup.name.barrel")
                         )
                         .component(
                                 JavaItemDataComponents.MAX_STACK_SIZE,
