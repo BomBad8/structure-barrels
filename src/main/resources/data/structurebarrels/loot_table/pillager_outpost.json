@@ -6,12 +6,12 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:crossbow",
-          "weight": 3
+          "weight": 6
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:crossbow",
-          "quality": 3,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
@@ -27,6 +27,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:crossbow",
+          "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_enchantments",
@@ -42,14 +43,12 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:crossbow",
+          "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_enchantments",
               "enchantments": {
-                "minecraft:quick_charge": 3,
-                "minecraft:unbreaking": 3,
-                "minecraft:mending": 1,
-                "minecraft:multishot": 5
+                "minecraft:multishot": 3
               }
             }
           ]
@@ -161,15 +160,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:goat_horn"
+          "name": "minecraft:goat_horn",
+          "functions": [
+            {
+              "function": "minecraft:set_instrument",
+              "options": "#minecraft:regular_goat_horns"
+            }
+          ]
         }
       ],
-      "functions": [
-        {
-          "function": "minecraft:set_instrument",
-          "options": "#minecraft:regular_goat_horns"
-        }
-      ],
+      "functions": [],
       "rolls": {
         "type": "minecraft:uniform",
         "max": 2,
@@ -194,8 +194,8 @@
           "name": "minecraft:sentry_armor_trim_smithing_template"
         }
       ],
-      "rolls": 2
+      "rolls": 1
     }
   ],
-  "random_sequence": "structurebarrels:chests/pillager_outpost"
+  "random_sequence": "structurebarrels:pillager_outpost"
 }

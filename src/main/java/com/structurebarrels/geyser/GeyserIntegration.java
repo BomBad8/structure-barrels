@@ -57,13 +57,6 @@ public final class GeyserIntegration {
 
         register(
                 event,
-                StructureBarrelItem.END_SHIP,
-                "end_ship_treasure_barrel",
-                "End Ship Treasure Barrel"
-        );
-
-        register(
-                event,
                 StructureBarrelItem.JUNGLE_TEMPLE,
                 "jungle_temple_treasure_barrel",
                 "Jungle Temple Treasure Barrel"

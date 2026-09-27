@@ -23,7 +23,6 @@ public final class StructureBarrelLoot {
             case "buried_treasure" -> "Buried Treasure";
             case "desert_pyramid" -> "Desert Pyramid";
             case "end_city" -> "End City";
-            case "end_ship" -> "End Ship";
             case "jungle_temple" -> "Jungle Temple";
             case "nether_fortress" -> "Nether Fortress";
             case "ocean_monument" -> "Ocean Monument";
@@ -39,28 +38,25 @@ public final class StructureBarrelLoot {
     private static String lootTableId(String structure) {
         return switch (structure) {
             case "ancient_city" ->
-                    "minecraft:chests/ancient_city";
+                    "structurebarrels:ancient_city";
 
             case "bastion" ->
-                    "minecraft:chests/bastion_treasure";
+                    "structurebarrels:bastion_treasure";
 
             case "buried_treasure" ->
-                    "minecraft:chests/buried_treasure";
+                    "structurebarrels:buried_treasure";
 
             case "desert_pyramid" ->
-                    "minecraft:chests/desert_pyramid";
+                    "structurebarrels:desert_pyramid";
 
             case "end_city" ->
-                    "minecraft:chests/end_city_treasure";
-
-            case "end_ship" ->
-                    "minecraft:chests/end_city_treasure";
+                    "structurebarrels:end_city_treasure";
 
             case "jungle_temple" ->
-                    "minecraft:chests/jungle_temple";
+                    "structurebarrels:jungle_temple";
 
             case "nether_fortress" ->
-                    "minecraft:chests/nether_bridge";
+                    "structurebarrels:nether_bridge";
 
             case "ocean_monument" ->
                     "structurebarrels:ocean_monument";
@@ -69,16 +65,16 @@ public final class StructureBarrelLoot {
                     "structurebarrels:pillager_outpost";
 
             case "stronghold" ->
-                    "minecraft:chests/stronghold_corridor";
+                    "structurebarrels:stronghold_corridor";
 
             case "trial_chamber_normal" ->
-                    "minecraft:chests/trial_chambers/reward";
+                    "structurebarrels:trial_chambers_reward";
 
             case "trial_chamber_ominous" ->
-                    "minecraft:chests/trial_chambers/reward_ominous";
+                    "structurebarrels:trial_chambers_reward_ominous";
 
             case "woodland_mansion" ->
-                    "minecraft:chests/woodland_mansion";
+                    "structurebarrels:woodland_mansion";
 
             default -> null;
         };

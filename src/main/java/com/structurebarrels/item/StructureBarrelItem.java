@@ -52,11 +52,6 @@ public class StructureBarrelItem extends BlockItem {
             "end_city"
     );
 
-    public static final Item END_SHIP = register(
-            "end_ship_treasure_barrel",
-            "end_ship"
-    );
-
     public static final Item JUNGLE_TEMPLE = register(
             "jungle_temple_treasure_barrel",
             "jungle_temple"
@@ -155,7 +150,6 @@ public class StructureBarrelItem extends BlockItem {
             case "buried_treasure" -> "Buried Treasure";
             case "desert_pyramid" -> "Desert Pyramid";
             case "end_city" -> "End City";
-            case "end_ship" -> "End Ship";
             case "jungle_temple" -> "Jungle Temple";
             case "nether_fortress" -> "Nether Fortress";
             case "ocean_monument" -> "Ocean Monument";
@@ -198,9 +192,6 @@ public class StructureBarrelItem extends BlockItem {
                         "minecraft:chests/desert_pyramid";
 
                 case "end_city" ->
-                        "minecraft:chests/end_city_treasure";
-
-                case "end_ship" ->
                         "minecraft:chests/end_city_treasure";
 
                 case "jungle_temple" ->
