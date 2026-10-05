@@ -86,25 +86,6 @@
               "options": "#minecraft:on_random_loot"
             }
           ],
-          "name": "minecraft:diamond_spear",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0.8
-              },
-              "function": "minecraft:set_damage"
-            },
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
-            }
-          ],
           "name": "minecraft:diamond_chestplate",
           "weight": 6
         },
@@ -168,11 +149,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond_sword",
-          "weight": 6
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_spear",
           "weight": 6
         },
         {
@@ -363,14 +339,14 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 11
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:snout_armor_trim_smithing_template"
         }
       ],
-      "rolls": 2
+      "rolls": 1
     },
     {
       "entries": [
@@ -379,7 +355,7 @@
           "name": "minecraft:netherite_upgrade_smithing_template"
         }
       ],
-      "rolls": 2
+      "rolls": 1
     }
   ],
   "random_sequence": "structurebarrels:bastion_treasure"
